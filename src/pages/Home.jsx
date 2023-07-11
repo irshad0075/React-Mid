@@ -1,6 +1,5 @@
 import React from "react";
 import Carouselstart from "../Components/Carouselstart";
-import WhyUs from "../components/WhyUs";
 import Sale from "../components/Sale";
 import BestSellerSection from "../components/BestSellerSection";
 import News from "../components/News";
@@ -13,7 +12,7 @@ export default function Home() {
       <BestSellerSection />
       <EcommerceCard />
       <Sale />
-      <WhyUs />
+ 
       <News />
     </>
   );
