@@ -1,5 +1,5 @@
 import React from "react";
-import Carouselstart from "../components/Carouselstart.jsx";
+import Carouselstart from "../components/Carouselstart";
 import AboutSection from "../components/AboutSection";
 import WhyUs from "../components/WhyUs";
 import Sale from "../components/Sale";
