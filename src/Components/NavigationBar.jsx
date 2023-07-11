@@ -141,6 +141,9 @@ const Header = () => {
                   <span className="cart__badge">{state.cart.length}</span>
                 )}
               </div>
+              <div className="user__profile">
+                <FaUserCircle className="user__icon" />
+              </div>
             </div>
           </div>
         </Container>

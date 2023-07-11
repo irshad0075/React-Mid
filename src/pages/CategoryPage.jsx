@@ -5,6 +5,8 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import "../styles/ProductSlider.css";
 
 // CustomPrevArrow component
@@ -65,38 +67,23 @@ export default function CategoryPage() {
 
   return (
     <div className="container">
-      <div className="my-6 text-center text-dark">
+      <div className="my-6 text-center" style={{ color: "#e1997e" }}>
         <h1>{categoryName.toUpperCase()}</h1>
-        <p className="text-danger">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat,
-          officia nihil! Nemo sunt reprehenderit voluptates amet itaque libero
-          in unde, molestias illo veniam, dolore veritatis eaque ipsum.
-          Molestiae, nam architecto!
-        </p>
       </div>
 
       <Slider {...sliderSettings} className="product-slider">
         {products.map((val, key) => (
           <div className="product-card-container" key={key}>
-            <Link
-              className="text-decoration-none text-danger"
-              to={`/products/${val.id}`}
-            >
-              <Card
-                className="product-card text-dark"
-                style={{
-                  backgroundColor: "white",
-                  border: "2px solid #e1997e",
-                  height: "100%",
-                }}
-              >
+            <Link className="text-decoration-none text-danger" to={`/products/${val.id}`}>
+              <Card className="product-card text-dark custom-card">
+                <div className="card-ribbon">₹ {val.price}</div>
                 <Card.Img variant="top" src={val.thumbnail} />
                 <Card.Body className="d-flex flex-column h-100">
                   <Card.Title>{val.title}</Card.Title>
                   <Card.Text>{val.description}</Card.Text>
                   <div className="mt-auto">
-                    <div className="text-dark fw-bold">₹ {val.price}</div>
-                    <button className="btn" style={{ background: "#e1997e" }}>
+                    <button className="btn btn-dark" style={{ backgroundColor: "#e1997e" }}>
+                      <FontAwesomeIcon icon={faCartPlus} className="me-2" />
                       Add to Cart
                     </button>
                   </div>

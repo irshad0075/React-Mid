@@ -1,32 +1,35 @@
 
 import React from "react";
 import "../styles/Footer.scss";
+import { FaTwitter, FaFacebook, FaLinkedin, FaPinterest, FaInstagram } from 'react-icons/fa';
+
 const Footer = () => {
   return (
+    <>
     <div className="footer">
       <div className="container">
         <div className="top">
           <div className="item">
             <h2>Categories</h2>
-            <span>Graphics & Design</span>
-            <span>Digital Marketing</span>
-            <span>Writing & Translation</span>
-            <span>Video & Animation</span>
-            <span>Music & Audio</span>
-            <span>Programming & Tech</span>
-            <span>Data</span>
-            <span>Business</span>
-            <span>Lifestyle</span>
-            <span>Photography</span>
-            <span>Sitemap</span>
+            <span>Smart Phones</span>
+            <span>Laptop</span>
+            <span>Fragnance</span>
+            <span>SkinCare</span>
+            <span>Grocerries</span>
+            <span>Home</span>
+            <span>Decoration</span>
+            <span>Furniture</span>
+            <span>Women Shoes</span>
+            <span>Jewellery</span>
+            <span>Lightning</span>
           </div>
           <div className="item">
             <h2>About</h2>
-            <span>Press & News</span>
-            <span>Partnerships</span>
+            <span>Top Sales</span>
+            <span>Latest Updates</span>
             <span>Privacy Policy</span>
             <span>Terms of Service</span>
-            <span>Intellectual Property Claims</span>
+            <span>Latest Brands</span>
             <span>Investor Relations</span>
             <span>Contact Sales</span>
           </div>
@@ -34,8 +37,8 @@ const Footer = () => {
             <h2>Support</h2>
             <span>Help & Support</span>
             <span>Trust & Safety</span>
-            <span>Selling on Liverr</span>
-            <span>Buying on Liverr</span>
+            <span>Selling online</span>
+            <span>Buying online</span>
           </div>
           <div className="item">
             <h2>Community</h2>
@@ -52,46 +55,39 @@ const Footer = () => {
             <span>Community Standards</span>
           </div>
           <div className="item">
-            <h2>More From Fiverr</h2>
-            <span>Liverr Business</span>
-            <span>Liverr Pro</span>
-            <span>Liverr Logo Maker</span>
-            <span>Liverr Guides</span>
+            <h2>More From Us</h2>
+            <span>Online Business</span>
+            <span>Latest Sale</span>
+            <span>Top Barnds </span>
+            <span>Brand Guides</span>
             <span>Get Inspired</span>
-            <span>Liverr Select</span>
-            <span>ClearVoice</span>
-            <span>Liverr Workspace</span>
-            <span>Learn</span>
+            <span>Product Select</span>
+            <span>Home Delievery</span>
+            <span>Cheap rates</span>
+            <span>Facilities</span>
             <span>Working Not Working</span>
           </div>
         </div>
         <hr />
         <div className="bottom">
           <div className="left">
-            <h2>liverr</h2>
-            <span>© Liverr International Ltd. 2023</span>
+            <h2>Online Shoping Site</h2>
+            <span>© IRFAH International Ltd. 2023</span>
           </div>
           <div className="right">
-            <div className="social">
-              <img src="/img/twitter.png" alt="" />
-              <img src="/img/facebook.png" alt="" />
-              <img src="/img/linkedin.png" alt="" />
-              <img src="/img/pinterest.png" alt="" />
-              <img src="/img/instagram.png" alt="" />
-            </div>
-            <div className="link">
-              <img src="/img/language.png" alt="" />
-              <span>English</span>
-            </div>
-            <div className="link">
-              <img src="/img/coin.png" alt="" />
-              <span>USD</span>
-            </div>
-            <img src="/img/accessibility.png" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
+  <div className="social">
+    <FaTwitter />
+    <FaFacebook />
+    <FaLinkedin />
+    <FaPinterest />
+    <FaInstagram />
+  </div>
+</div>
+</div>
+</div>
+</div>
+    
+    </>
   );
 };
 
