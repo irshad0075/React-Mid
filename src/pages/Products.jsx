@@ -9,8 +9,6 @@ export default function Products() {
   const [categorizedProducts, setCategorizedProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true); // New state for loading
 
-
-  
   useEffect(() => {
     axios
       .get("https://dummyjson.com/products")
