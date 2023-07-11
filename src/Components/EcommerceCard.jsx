@@ -4,13 +4,13 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import "../styles/cardStyle.css";
 import Carousel from 'react-bootstrap/Carousel';
-import imageslide1 from "../assets/images/c1.jpg";
-import imageslide2 from "../assets/images/c2.jpg";
-import imageslide3 from "../assets/images/c3.jpg";
-import imageslide4 from "../assets/images/c4.jpg";
-import imageslide5 from "../assets/images/c5.jpg";
-import imageslide6 from "../assets/images/c6.jpg";
-import imageslide7 from "../assets/images/c7.jpg";
+import slide1 from "../assets/images/c1.jpg";
+import slide2 from "../assets/images/c2.jpg";
+import slide3 from "../assets/images/c3.jpg";
+import slide4 from "../assets/images/c4.jpg";
+import slide5 from "../assets/images/c5.jpg";
+import slide6 from "../assets/images/c6.jpg";
+import slide7 from "../assets/images/c7.jpg";
 
 const CategorySection = ({ categories }) => {
   return (
@@ -49,25 +49,25 @@ const CarouselSection = () => {
         onSelect={handleSelect}
       >
         <Carousel.Item interval={1000}>
-          <img className="carousel-image" src={imageslide1} alt="First slide" />
+          <img className="carousel-image" src={slide1} alt="First slide" />
         </Carousel.Item>
         <Carousel.Item interval={500}>
-          <img className="carousel-image" src={imageslide2} alt="Second slide" />
+          <img className="carousel-image" src={slide2} alt="Second slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carousel-image" src={imageslide3} alt="Third slide" />
+          <img className="carousel-image" src={slide3} alt="Third slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carousel-image" src={imageslide4} alt="Fourth slide" />
+          <img className="carousel-image" src={slide4} alt="Fourth slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carousel-image" src={imageslide5} alt="Fifth slide" />
+          <img className="carousel-image" src={slide5} alt="Fifth slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carousel-image" src={imageslide6} alt="Sixth slide" />
+          <img className="carousel-image" src={slide6} alt="Sixth slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="carousel-image" src={imageslide7} alt="Seventh slide" />
+          <img className="carousel-image" src={slide7} alt="Seventh slide" />
         </Carousel.Item>
       </Carousel>
     </div>

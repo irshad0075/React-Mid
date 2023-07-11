@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "../styles/cardStyle.css";
 import "../styles/best-seller.css";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-import axios from "axios";
-
 import imageslide1 from "../assets/images/1.jpg";
 import imageslide2 from "../assets/images/2.jpg";
 import imageslide3 from "../assets/images/3.jpg";
 import imageslide4 from "../assets/images/4.jpg";
 import imageslide5 from "../assets/images/5.jpg";
-
 import image1 from "../assets/images/m1.jpg";
 import image2 from "../assets/images/m2.jpg";
 import image3 from "../assets/images/m3.jpg";
@@ -58,31 +52,7 @@ const BestSellerSection = () => {
           Top <span>Categories</span>
         </h2>
       </div>
-      {/* <div className="d-flex">
-        <div
-          className="col-md-4"
-          style={{ maxHeight: "400px", maxWidth: "350px", overflowY: "auto" }}
-        >
-          {categories.map((val, key) => (
-            <div className="col-md-9 my-2" key={key}>
-              <Link
-                className="text-decoration-none"
-                to={`/products/category/${val}`}
-              >
-                <Card
-                  className="h-100 text-dark"
-                  style={{ border: "2px solid #e1997e" }}
-                >
-                  <Card.Body>
-                    <Card.Title>
-                      {key + 1} - {val.toUpperCase().replace("-", " ")}
-                    </Card.Title>
-                  </Card.Body>
-                </Card>
-              </Link>
-            </div> */}
-          {/* ))}
-        </div> */}
+ 
 <div className="d-flex">
         <div className="col-md-3 my-2">
           <div className="card" style={{ border: "2px solid #e1997e" }}>
