@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "../styles/Login.css";
 import { Link, useNavigate } from "react-router-dom";
-import LoginImg from "../assets/images/Login[1].svg";
+import LoginImg from "../assets/images/Loginnew.svg";
 import Swal from 'sweetalert2';
 import { LoginRouteContext } from "../context/loginContext/LoginContext";
 
