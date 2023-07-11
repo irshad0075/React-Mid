@@ -7,27 +7,16 @@ import BestSellerSection from "../components/BestSellerSection";
 import News from "../components/News";
 import EcommerceCard from "../components/EcommerceCard";
 
-function Home() {
+export default function Home() {
   return (
     <>
       <Carouselstart />
       <AboutSection />
       <BestSellerSection />
-      <EcommerceCard/>
+      <EcommerceCard />
       <Sale />
       <WhyUs />
       <News />
-     
- 
-     
- 
-    
-     
-     
-      
-  
     </>
   );
 }
-
-export default Home;
