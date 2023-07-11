@@ -1,6 +1,5 @@
 import React from "react";
 import Carouselstart from "../Components/Carouselstart";
-
 import WhyUs from "../components/WhyUs";
 import Sale from "../components/Sale";
 import BestSellerSection from "../components/BestSellerSection";
@@ -11,7 +10,6 @@ export default function Home() {
   return (
     <>
       <Carouselstart />
-
       <BestSellerSection />
       <EcommerceCard />
       <Sale />
