@@ -1,18 +1,21 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { Container, Row, Col, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUserCircle, FaUserCheck } from "react-icons/fa";
 import { BsFillCartFill, BsSearch } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import CartItems from "./CartItems";
-import { CartContext } from "../context/addtoCart/context";
+import { LoginRouteContext } from '../context/loginContext/LoginContext';
 import axios from "axios";
 import "../styles/Header.css";
+import Cart from '../Components/Cart';
+
 
 const Header = () => {
+  const { state } = useContext(LoginRouteContext);
+  const { user } = state;
   const menuRef = useRef(null);
   const [showCart, setShowCart] = useState(false);
-  const { state, dispatch } = useContext(CartContext);
 
   const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
 
@@ -24,6 +27,8 @@ const Header = () => {
       .then((response) => setCategories(response.data))
       .catch((error) => console.log(error));
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <header className="header">
@@ -47,7 +52,10 @@ const Header = () => {
             <Col lg="4" md="3" sm="4">
               <div className="logo">
                 <h1>
-                  <Link to="/home" className="d-flex align-items-center gap-2">
+                  <Link
+                    to="/home"
+                    className="d-flex align-items-center gap-2"
+                  >
                     <i className="ri-car-line"></i>
                     <span>Online Shopping Site</span>
                   </Link>
@@ -110,6 +118,7 @@ const Header = () => {
                 <NavDropdown title="Categories" id="basic-nav-dropdown">
                   {categories.map((category, index) => (
                     <NavDropdown.Item
+                      style={{ color: "#e1997e" }}
                       key={index}
                       as={Link}
                       to={`/products/category/${category}`}
@@ -119,12 +128,24 @@ const Header = () => {
                   ))}
                 </NavDropdown>
 
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
-                <Link to="/signup" className="nav-link">
-                  Sign Up
-                </Link>
+                {user ? (
+                  <>
+                    <Link to="/logout" className="nav-link">
+                      Logout
+                    </Link>
+                    <span className='mx-3'><FaUserCheck/> Hi, {user.username}</span> 
+                    <Cart/>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login" className="nav-link">
+                      Login
+                    </Link>
+                    <Link to="/signup" className="nav-link">
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
 
@@ -135,12 +156,12 @@ const Header = () => {
                   <BsSearch className="search__icon" />
                 </span>
               </div>
-              <div className="user__cart" onClick={() => setShowCart(true)}>
-                <BsFillCartFill className="cart__icon" />
-                {state.cart && state.cart.length > 0 && (
-                  <span className="cart__badge">{state.cart.length}</span>
-                )}
-              </div>
+              {user && user.cart && user.cart.length > 0 && (
+                <div className="user__cart" onClick={() => setShowCart(true)}>
+                  <BsFillCartFill className="cart__icon" />
+                  <span className="cart__badge">{user.cart.length}</span>
+                </div>
+              )}
               <div className="user__profile">
                 <FaUserCircle className="user__icon" />
               </div>
@@ -158,14 +179,15 @@ const Header = () => {
           <Offcanvas.Title>Cart</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {state.cart && state.cart.length > 0 ? (
-            state.cart.map((item, index) => (
+          {user && user.cart && user.cart.length > 0 ? (
+            user.cart.map((item, index) => (
               <CartItems key={index} data={item} />
             ))
           ) : (
             <p>No items in cart.</p>
           )}
           <div className="cart__footer">
+            {/* Include the appropriate dispatch function */}
             <button
               className="clear__cart__button"
               onClick={() => dispatch({ type: "CLEAR_CART" })}

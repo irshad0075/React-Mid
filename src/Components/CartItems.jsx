@@ -1,4 +1,5 @@
 import React from 'react'
+
 export default function CartItems({data}) {
     return (
         <div className="card mb-3 shadow-sm">

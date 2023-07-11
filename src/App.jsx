@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
@@ -9,14 +9,18 @@ import NavigationBar from "./Components/NavigationBar";
 import FooterSection from "./Components/FooterSection";
 import CategoryPage from "./pages/CategoryPage";
 import ProductPage from "./pages/ProductPage";
+import { LoginRouteContext } from './context/loginContext/LoginContext';
 
 export default function App() {
-  const [user, setUser] = useState(false);
+  // const [user, setUser] = useState(false);
+  const {state}=useContext(LoginRouteContext)
   return (
     <>
+   
       <NavigationBar />
-      {user ? (
-        <Routes>
+      <Routes>
+      {state.user ? (
+        <>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:productID" element={<ProductPage />} />
@@ -25,16 +29,17 @@ export default function App() {
             element={<CategoryPage />}
           />
           <Route path="*" element={<Page404 />} />
-        </Routes>
+          </>
+       
       ) : (
-        <Routes>
+        <>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<Navigate to="/login" replace={true} />} />
-        </Routes>
+        </>
       )}
-
+</Routes>
       <FooterSection />
     </>
   );
