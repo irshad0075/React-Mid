@@ -2,7 +2,7 @@ import React, { useContext ,useState } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { BsFillBasketFill } from 'react-icons/bs'
 import { CartContext } from '../context/cartContext/CartContext'; 
-import CartItems from './CartItem';
+import CartItems from '../Components/CartItems';
 
 function Cart() {
     const [show, setShow] = useState(false);

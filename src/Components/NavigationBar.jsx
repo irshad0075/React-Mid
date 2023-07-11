@@ -10,14 +10,20 @@ import axios from "axios";
 import "../styles/Header.css";
 import Cart from '../Components/Cart';
 
-
 const Header = () => {
-  const { state } = useContext(LoginRouteContext);
+  const { state, dispatch } = useContext(LoginRouteContext);
   const { user } = state;
   const menuRef = useRef(null);
   const [showCart, setShowCart] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
 
-  const toggleMenu = () => menuRef.current.classList.toggle("menu__active");
+  const toggleMenu = () => {
+    setMenuActive(!menuActive);
+  };
+
+  const closeMenu = () => {
+    setMenuActive(false);
+  };
 
   const [categories, setCategories] = useState([]);
 
@@ -30,8 +36,13 @@ const Header = () => {
 
   const navigate = useNavigate();
 
+  const addToCart = (item) => {
+    dispatch({ type: "ADD_TO_CART", payload: item });
+  };
+
   return (
     <header className="header">
+      {/* Header Top */}
       <div className="header__top">
         <Container>
           <Row className="align-items-center">
@@ -46,6 +57,7 @@ const Header = () => {
         </Container>
       </div>
 
+      {/* Header Middle */}
       <div className="header__middle">
         <Container>
           <Row>
@@ -100,6 +112,7 @@ const Header = () => {
         </Container>
       </div>
 
+      {/* Main Navbar */}
       <div className="main__navbar">
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
@@ -107,12 +120,12 @@ const Header = () => {
               <i className="ri-menu-line"></i>
             </span>
 
-            <div className="navigation" ref={menuRef}>
+            <div className={`navigation ${menuActive ? 'menu__active' : ''}`} ref={menuRef}>
               <div className="menu">
-                <Link to="/" className="nav-link">
+                <Link to="/" className="nav-link" onClick={closeMenu}>
                   Home
                 </Link>
-                <Link to="/products" className="nav-link">
+                <Link to="/products" className="nav-link" onClick={closeMenu}>
                   Products
                 </Link>
                 <NavDropdown title="Categories" id="basic-nav-dropdown">
@@ -122,26 +135,20 @@ const Header = () => {
                       key={index}
                       as={Link}
                       to={`/products/category/${category}`}
+                      onClick={closeMenu}
                     >
                       {category.toUpperCase().replace("-", " ")}
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>
-
-                {user ? (
+              </div>
+              <div className="menu">
+                {!user && (
                   <>
-                    <Link to="/logout" className="nav-link">
-                      Logout
-                    </Link>
-                    <span className='mx-3'><FaUserCheck/> Hi, {user.username}</span> 
-                    <Cart/>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/login" className="nav-link">
+                    <Link to="/login" className="nav-link" onClick={closeMenu}>
                       Login
                     </Link>
-                    <Link to="/signup" className="nav-link">
+                    <Link to="/signup" className="nav-link" onClick={closeMenu}>
                       Sign Up
                     </Link>
                   </>
@@ -170,6 +177,7 @@ const Header = () => {
         </Container>
       </div>
 
+      {/* Offcanvas Cart */}
       <Offcanvas
         show={showCart}
         onHide={() => setShowCart(false)}
@@ -187,7 +195,6 @@ const Header = () => {
             <p>No items in cart.</p>
           )}
           <div className="cart__footer">
-            {/* Include the appropriate dispatch function */}
             <button
               className="clear__cart__button"
               onClick={() => dispatch({ type: "CLEAR_CART" })}
