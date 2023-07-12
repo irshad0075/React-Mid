@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,16 +7,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import ImageSection from "../components/ImageSection";
 import "../styles/product-page.css";
+import { CartContext } from "../context/cartContext/CartContext";
 
 function ProductPage() {
-  const { productID } = useParams();
+  const { state, dispatch } = useContext(CartContext);
   const [product, setProduct] = useState({});
+
+  const { productID } = useParams();
+
   const [review, setReview] = useState("");
   const [ratingStar, setRatingStar] = useState(0);
   const [productQuantity, setProductQuantity] = useState(1);
 
   const ratingChanged = (newRating) => {
     setRatingStar(newRating);
+  };
+
+  const addtoCart = (item) => {
+    // console.log(item)
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: item,
+    });
   };
 
   const submitReview = () => {
@@ -92,7 +104,8 @@ function ProductPage() {
 
             <div className="d-flex mb-3">
               <button
-                className="btn btn-dark mx-3"style={{ backgroundColor: "#e1997e" }}
+                className="btn btn-dark mx-3"
+                style={{ backgroundColor: "#e1997e" }}
                 disabled={productQuantity > 1 ? false : true}
                 onClick={() => setProductQuantity(productQuantity - 1)}
               >
@@ -100,12 +113,17 @@ function ProductPage() {
               </button>
               <span className="font-weight-bold">{productQuantity}</span>
               <button
-                className="btn btn-dark mx-3"style={{ backgroundColor: "#e1997e" }}
+                className="btn btn-dark mx-3"
+                style={{ backgroundColor: "#e1997e" }}
                 onClick={() => setProductQuantity(productQuantity + 1)}
               >
                 <FontAwesomeIcon icon={faPlus} />
               </button>
-              <button className="btn btn-dark" style={{ backgroundColor: "#e1997e" }} onClick={addToCart}>
+              <button
+                className="btn btn-dark"
+                style={{ backgroundColor: "#e1997e" }}
+                onClick={() => addtoCart(product)}
+              >
                 <FontAwesomeIcon icon={faCartPlus} className="me-2" />
                 Add to Cart
               </button>
@@ -141,7 +159,11 @@ function ProductPage() {
             </div>
 
             <div className="d-flex">
-              <button className="btn btn-dark" onClick={submitReview} style={{ backgroundColor: "#e1997e" }}>
+              <button
+                className="btn btn-dark"
+                onClick={submitReview}
+                style={{ backgroundColor: "#e1997e" }}
+              >
                 Submit Review
               </button>
             </div>

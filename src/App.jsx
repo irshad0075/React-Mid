@@ -16,18 +16,7 @@ export default function App() {
   const {state}=useContext(LoginRouteContext)
   return (
     <>
-    {/* <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-    /> */}
+  
       <NavigationBar />
       <Routes>
       {state.user ? (

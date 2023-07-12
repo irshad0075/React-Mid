@@ -1,29 +1,19 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
-import { Container, Row, Col, NavDropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaUserCircle, FaUserCheck } from "react-icons/fa";
-import { BsFillCartFill, BsSearch } from "react-icons/bs";
+// import { BsFillCartFill, BsSearch } from "react-icons/bs";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import CartItems from "./CartItems";
-import { LoginRouteContext } from '../context/loginContext/LoginContext';
+import { LoginRouteContext } from "../context/loginContext/LoginContext";
 import axios from "axios";
 import "../styles/Header.css";
-import Cart from '../Components/Cart';
+import Cart from "../Components/Cart";
 
 const Header = () => {
-  const { state, dispatch } = useContext(LoginRouteContext);
+  const { state } = useContext(LoginRouteContext);
   const { user } = state;
-  const menuRef = useRef(null);
   const [showCart, setShowCart] = useState(false);
-  const [menuActive, setMenuActive] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuActive(!menuActive);
-  };
-
-  const closeMenu = () => {
-    setMenuActive(false);
-  };
 
   const [categories, setCategories] = useState([]);
 
@@ -34,150 +24,114 @@ const Header = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  const navigate = useNavigate();
-
-  const addToCart = (item) => {
-    dispatch({ type: "ADD_TO_CART", payload: item });
-  };
-
   return (
     <header className="header">
-      {/* Header Top */}
       <div className="header__top">
         <Container>
-          <Row className="align-items-center">
-            <Col lg="6" md="6" sm="6">
-              <div className="header__top__left">
-                <span>Need Help?</span>
-                <i className="ri-phone-fill"></i>
-                <span className="header__top__help">+1-202-555-0149</span>
-              </div>
-            </Col>
-          </Row>
+          <div className="header__top__left">
+            <span>Need Help?</span>
+            <i className="ri-phone-fill"></i>
+            <span className="header__top__help">+1-202-555-0149</span>
+          </div>
         </Container>
       </div>
 
-      {/* Header Middle */}
       <div className="header__middle">
-        <Container>
-          <Row>
-            <Col lg="4" md="3" sm="4">
-              <div className="logo">
-                <h1>
-                  <Link
-                    to="/home"
-                    className="d-flex align-items-center gap-2"
-                  >
-                    <i className="ri-car-line"></i>
-                    <span>Online Shopping Site</span>
-                  </Link>
-                </h1>
-              </div>
-            </Col>
-            <Col lg="3" md="3" sm="4">
-              <div className="header__location d-flex align-items-center gap-2">
-                <span>
-                  <i className="ri-earth-line"></i>
-                </span>
-                <div className="header__location-content">
-                  <h4>Pakistan</h4>
-                  <h6>Karachi City, Pakistan</h6>
-                </div>
-              </div>
-            </Col>
-            <Col lg="3" md="3" sm="4">
-              <div className="header__location d-flex align-items-center gap-2">
-                <span>
-                  <i className="ri-time-line"></i>
-                </span>
-                <div className="header__location-content">
-                  <h4>Sunday to Friday</h4>
-                  <h6>10am - 7pm</h6>
-                </div>
-              </div>
-            </Col>
-            <Col
-              lg="2"
-              md="3"
-              sm="0"
-              className="d-flex align-items-center justify-content-end"
-            >
-              <button className="header__btn btn">
-                <Link to="/contact">
-                  <i className="ri-phone-line"></i> Request a call
-                </Link>
-              </button>
-            </Col>
-          </Row>
+        <Container className="d-flex align-items-center justify-content-between">
+          <div className="logo">
+            <h1>
+              <Link to="/home" className="d-flex align-items-center gap-2">
+                <i className="ri-car-line"></i>
+                <span>Online Shopping Site</span>
+              </Link>
+            </h1>
+          </div>
+          <div className="header__location d-flex align-items-center gap-2">
+            <span>
+              <i className="ri-earth-line"></i>
+            </span>
+            <div className="header__location-content">
+              <h4>Pakistan</h4>
+              <h6>Karachi City, Pakistan</h6>
+            </div>
+          </div>
+          <div className="header__location d-flex align-items-center gap-2">
+            <span>
+              <i className="ri-time-line"></i>
+            </span>
+            <div className="header__location-content">
+              <h4>Sunday to Friday</h4>
+              <h6>10am - 7pm</h6>
+            </div>
+          </div>
+         
         </Container>
       </div>
 
-      {/* Main Navbar */}
       <div className="main__navbar">
-        <Container>
-          <div className="navigation__wrapper d-flex align-items-center justify-content-between">
-            <span className="mobile__menu" onClick={toggleMenu}>
-              <i className="ri-menu-line"></i>
-            </span>
-
-            <div className={`navigation ${menuActive ? 'menu__active' : ''}`} ref={menuRef}>
-              <div className="menu">
-                <Link to="/" className="nav-link" onClick={closeMenu}>
+        <Navbar expand="lg" bg="light" variant="light" collapseOnSelect>
+          <Container>
+            <Navbar.Brand>
+              <Link to="/home" className="d-flex align-items-center gap-2">
+                <i className="ri-car-line"></i>
+              </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link as={Link} to="/">
                   Home
-                </Link>
-                <Link to="/products" className="nav-link" onClick={closeMenu}>
+                </Nav.Link>
+                <Nav.Link as={Link} to="/products">
                   Products
-                </Link>
+                </Nav.Link>
                 <NavDropdown title="Categories" id="basic-nav-dropdown">
                   {categories.map((category, index) => (
                     <NavDropdown.Item
-                      style={{ color: "#e1997e" }}
                       key={index}
                       as={Link}
                       to={`/products/category/${category}`}
-                      onClick={closeMenu}
                     >
                       {category.toUpperCase().replace("-", " ")}
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>
-              </div>
-              <div className="menu">
-                {!user && (
+              </Nav>
+              <Nav>
+                {user ? (
                   <>
-                    <Link to="/login" className="nav-link" onClick={closeMenu}>
+                    <Nav.Link as={Link} to="/logout">
+                      Logout
+                    </Nav.Link>
+                    <span className="mx-3">
+                      <FaUserCheck /> Dont be shy say HI , {user.username}
+                    </span>
+                    <Cart />
+                  </>
+                ) : (
+                  <>
+                    <Nav.Link as={Link} to="/login">
                       Login
-                    </Link>
-                    <Link to="/signup" className="nav-link" onClick={closeMenu}>
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/signup">
                       Sign Up
-                    </Link>
+                    </Nav.Link>
                   </>
                 )}
-              </div>
-            </div>
-
-            <div className="nav__right">
-              <div className="search__box">
-                <input type="text" placeholder="Search" />
-                <span>
-                  <BsSearch className="search__icon" />
-                </span>
-              </div>
-              {user && user.cart && user.cart.length > 0 && (
-                <div className="user__cart" onClick={() => setShowCart(true)}>
-                  <BsFillCartFill className="cart__icon" />
-                  <span className="cart__badge">{user.cart.length}</span>
-                </div>
-              )}
-              <div className="user__profile">
-                <FaUserCircle className="user__icon" />
-              </div>
-            </div>
-          </div>
-        </Container>
+             
+                {user && user.cart && user.cart.length > 0 && (
+                  <div className="user__cart" onClick={() => setShowCart(true)}>
+                    <BsFillCartFill className="cart__icon" />
+                    <span className="cart__badge">{user.cart.length}</span>
+                  </div>
+                )}
+               
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </div>
 
-      {/* Offcanvas Cart */}
       <Offcanvas
         show={showCart}
         onHide={() => setShowCart(false)}
@@ -195,6 +149,7 @@ const Header = () => {
             <p>No items in cart.</p>
           )}
           <div className="cart__footer">
+            {/* Include the appropriate dispatch function */}
             <button
               className="clear__cart__button"
               onClick={() => dispatch({ type: "CLEAR_CART" })}

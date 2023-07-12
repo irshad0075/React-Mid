@@ -1,9 +1,7 @@
 import React from "react";
 import Carouselstart from "../Components/Carouselstart";
-
 import { Container, Row, Col, Card } from "react-bootstrap";
 import imageslide from "../assets/images/Imac.gif";
-
 import Sale from "../components/Sale";
 import BestSellerSection from "../components/BestSellerSection";
 import News from "../components/News";

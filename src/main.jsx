@@ -8,6 +8,7 @@ import CartProvider from './context/cartContext/CartContext.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <LoginContext>
     <CartProvider>
+      
     <React.StrictMode>
       <BrowserRouter>
         <App />
